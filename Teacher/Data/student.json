@@ -1,0 +1,23 @@
+[
+    {
+        "cName": "Tanvir ahamed",
+        "studentid": "212121",
+        "coursename": "C#",
+        "coursesection": "c",
+        "courseSchedule": "sun-mon"
+    },
+    {
+        "cName": "Tanvir",
+        "studentid": "2121",
+        "coursename": "C",
+        "coursesection": "c1",
+        "courseSchedule": "sun-mon"
+    },
+    {
+        "cName": "ekramul haque",
+        "studentid": "21444711",
+        "coursename": "C#",
+        "coursesection": "c",
+        "courseSchedule": "sun-mon"
+    }
+]
