@@ -43,7 +43,7 @@ if (!empty($Courses)) {
     echo '<ul>';
     foreach ($Courses as $Course) {
         
-        echo '<br><li><h2>',"Course Title: ". $Course['courseTitle'] . '</h2></li>';
+        echo '<br><h2><li>',"Course Title: ". $Course['courseTitle'] . '</li></h2>';
         echo "Course ID: " . $Course['courseid'] . '</li><br>';
         echo "Course Price: " . $Course['courseprice'] . '</li><br>';
 

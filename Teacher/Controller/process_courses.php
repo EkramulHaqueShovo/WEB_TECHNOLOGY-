@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $oldCourses[] = $newCourse;
 
-    $jsondata = json_encode($oldCourses, JSON_PRETTY_PRINT);
+    $data = json_encode($oldCourses, JSON_PRETTY_PRINT);
 
-    if (file_put_contents("../Data/Courses.json", $jsondata)) {
+    if (file_put_contents("../Data/Courses.json", $data)) {
         header("Location: ../Main/courses.php");
         exit();
     } else {
