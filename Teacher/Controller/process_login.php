@@ -11,28 +11,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($_POST['password'])) {
-        $errors[] = 'password is required.';
+        $errors[] = 'Password is required.';
     }
+
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header("Location:../Main/login.php");
+        header("Location: ../Main/login.php");
         exit();
     }
 
-  
+    function validateLogin($teacherId, $password) {
+        $con = new mysqli('localhost', 'root', '', 'teacher_database');
+        if ($con->connect_error) {
+            die("Connection failed: " . $con->connect_error);
+        }
 
-function validateLogin($teacherId, $password) {
-    $userData = json_decode(file_get_contents('../Data/userdata.json'), true);
+        $stmt = $con->prepare("SELECT * FROM information WHERE `Teacher ID` = ? AND Password = ?");
+        $stmt->bind_param("ss", $teacherId, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    foreach ($userData as $user) {
-        if ($user['T_id'] == $teacherId && $user['T_password'] == $password) {
-           
+        if ($result->num_rows > 0) {
+            $stmt->close();
+            $con->close();
             return true;
+        } else {
+            $stmt->close();
+            $con->close();
+            return false;
         }
     }
-    return false;
-}
-
 
     $teacherId = $_POST['teacherId'];
     $password = $_POST['password'];
@@ -41,9 +49,9 @@ function validateLogin($teacherId, $password) {
         header('Location: ../Main/Home_page.php');
         exit;
     } else {
-        
         $error = "Teacher ID or Password wrong...";
-        header("Location:../Main/login.php");
+        $_SESSION['errors'] = [$error];
+        header("Location: ../Main/login.php");
         exit;
     }
 }

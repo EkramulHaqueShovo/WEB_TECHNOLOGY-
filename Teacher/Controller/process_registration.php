@@ -1,6 +1,13 @@
+User
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+}
+include "../Model/mydb.php";
+// Database connection
+$con = new mysqli('localhost', 'root', '', 'teacher_database');
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($_POST['T_email'])) {
         $errors[] = 'Email is required.';
-    } 
+    } elseif (!filter_var($_POST['T_email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Invalid email format.';
+    }
 
     if (empty($_POST['T_dob'])) {
         $errors[] = 'Date of Birth is required.';
@@ -24,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($_POST['T_phone'])) {
         $errors[] = 'Phone is required.';
+    } elseif (!preg_match('/^\d{11}$/', $_POST['T_phone'])) {
+        $errors[] = 'Invalid phone number format.';
     }
 
     if (empty($_POST['T_gender'])) {
@@ -33,39 +44,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['T_id'])) {
         $errors[] = 'ID is required.';
     }
+
     if (empty($_POST['T_password'])) {
         $errors[] = 'Password is required.';
     }
 
-    
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header("Location:../Main/registration.php");
+        header("Location: ../Main/registration.php");
         exit();
     }
 
-    
-    $userdata = array(
-        'T_first_name' => $_POST['T_first_name'],
-        'T_last_name' => $_POST['T_last_name'],
-        'T_email' => $_POST['T_email'],
-        'T_dob' => $_POST['T_dob'],
-        'T_phone' => $_POST['T_phone'],
-        'T_gender' => $_POST['T_gender'],
-        'T_id' => $_POST['T_id'],
-        'T_password' => $_POST['T_password'] 
-        
-);
+    // Insert data into the database using prepared statements
+    $stmt = $con->prepare(getTeacherInformation());
 
-$oldData = json_decode(file_get_contents("../Data/userdata.json"), true);
-$oldData[] = $userdata;
-if (file_put_contents("../Data/userdata.json", json_encode($oldData, JSON_PRETTY_PRINT))) {
-    header("Location: ../Main/login.php");
-    exit;
-} else {
-    echo "Error!";
-}
-   
-    
+    if ($stmt) {
+        $stmt->bind_param("ssssssss", $_POST['T_first_name'], $_POST['T_last_name'], $_POST['T_email'], $_POST['T_dob'], $_POST['T_phone'], $_POST['T_gender'], $_POST['T_id'], $_POST['T_password']);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            $con->close();
+            header("Location: ../Main/login.php");
+            exit();
+        } else {
+            $errors[] = "Error executing the query: " . $stmt->error;
+        }
+    } else {
+        $errors[] = "Error preparing the statement: " . $con->error;
+    }
+
+    // Handle errors
+    $_SESSION['errors'] = $errors;
+    header("Location: ../Main/registration.php");
+    exit();
 }
 ?>
