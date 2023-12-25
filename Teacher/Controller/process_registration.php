@@ -1,14 +1,18 @@
-User
+
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include "../Model/mydb.php";
-// Database connection
+
+
 $con = new mysqli('localhost', 'root', '', 'teacher_database');
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
+
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
@@ -54,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../Main/registration.php");
         exit();
     }
+   
 
     // Insert data into the database using prepared statements
     $stmt = $con->prepare(getTeacherInformation());

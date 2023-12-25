@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COURSES</title>
+    <link rel="stylesheet" href="../Css/style.css">
   
 </head>
 <body>
@@ -12,7 +13,7 @@
         <h1>COURSES</h1>
         <nav>
             <a href="Home_page.php">Home</a>
-            <a href="profile_teacher.php">Profile</a>
+           
             <a href="View_student.php">Student</a>
             <a href="Notice.php">Notice</a>
             <a href="login.php">Logout</a>

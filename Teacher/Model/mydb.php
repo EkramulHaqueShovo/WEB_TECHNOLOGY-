@@ -10,5 +10,15 @@ function getDeleteCourseQuery(){
 function getTeacherInformation(){
     return "INSERT INTO information (`First Name`, `Last Name`, Email, `Date of Birth`, Phone, Gender, `Teacher ID`, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 }
+function getTeacherprofile(){
+    return "SELECT * FROM information WHERE `Teacher ID` = ?";
+}
+function getnotice(){
+ return " INSERT INTO notice (T_user, notice) VALUES (?, ?)";
+}
+function getshownotice(){
+    return "SELECT * FROM notice";
+}
+
 
 ?>

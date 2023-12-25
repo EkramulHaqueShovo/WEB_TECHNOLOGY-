@@ -1,4 +1,5 @@
 <?php
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -6,6 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
+  
     if (empty($_POST['teacherId'])) {
         $errors[] = 'Teacher ID is required.';
     }
@@ -20,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+
     function validateLogin($teacherId, $password) {
         $con = new mysqli('localhost', 'root', '', 'teacher_database');
         if ($con->connect_error) {
@@ -31,24 +34,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $stmt->close();
-            $con->close();
-            return true;
-        } else {
-            $stmt->close();
-            $con->close();
-            return false;
-        }
+        $success = $result->num_rows > 0;
+
+        $stmt->close();
+        $con->close();
+
+        return $success;
     }
 
     $teacherId = $_POST['teacherId'];
     $password = $_POST['password'];
 
     if (validateLogin($teacherId, $password)) {
+       
+        $_SESSION['teacherId'] = $teacherId;
+
         header('Location: ../Main/Home_page.php');
         exit;
     } else {
+      
         $error = "Teacher ID or Password wrong...";
         $_SESSION['errors'] = [$error];
         header("Location: ../Main/login.php");

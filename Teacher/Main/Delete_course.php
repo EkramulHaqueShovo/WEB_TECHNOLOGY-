@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DELETE COURSES</title>
+    <link rel="stylesheet" href="../Css/style.css">
    
 </head>
 <body>
@@ -12,7 +13,7 @@
         <center>
         <h1>DELETE COURSES</h1>
         <nav>
-            <a href="profile_teacher.php"> Profile</a>
+           
             <a href="courses.php">Courses</a>
             <a href="View_student.php">Student</a>
             <a href="Notice.php">Notice</a> 

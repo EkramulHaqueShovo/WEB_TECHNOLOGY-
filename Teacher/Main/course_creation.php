@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Courses</title>
+    <link rel="stylesheet" href="../Css/style.css">
  
 </head>
 <body>
     <header>
-        <center>
+        
         <h1>ADD COURSES</h1>
         <nav>
              <a href="Home_page.php">Home</a>
-            <a href="profile_teacher.php"> Profile</a>
+            
             <a href="courses.php">Courses</a>
             <a href="View_student.php">Student</a>
             <a href="Notice.php">Notice</a>
@@ -21,7 +22,7 @@
           
         </nav></center><br>
     </header>
-    <center>
+  
 
     <form action="../Controller/process_courses.php" method="post">
   
@@ -46,12 +47,12 @@
         <h3>Course Description:<h3><br>
         <textarea id="courseDescription" name="courseDescription" rows="2" required></textarea><br><br>
 
-        <input type="submit" value="Add Courses"><br><br>
+        <button type="submit" value="Add Courses">Add Course</button><br><br>
         
         
      </fieldset>
   
-    </center>
+   
    </form>
     
 </body>

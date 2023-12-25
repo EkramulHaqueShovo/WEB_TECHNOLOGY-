@@ -1,20 +1,35 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-   
+session_start();
+include "../Model/mydb.php";
 
-    $Notice = array(
-        'notice' => $_POST['notice'],
-        'T_user' =>$_POST['T_user']
-    );
-    $notices = json_decode(file_get_contents("../Data/notices.json"), true);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userType = $_POST["T_user"];
+    $noticeText = $_POST["notice"];
 
-    $notices[] = $Notice;
-
-    if (file_put_contents("../Data/notices.json", json_encode($notices, JSON_PRETTY_PRINT))) {
-        header("Location: ../Main/Notice.php");
-        exit;
-    } else {
-        echo "Error!";
+    $con = new mysqli('localhost', 'root', '', 'notification');
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
     }
+
+    $stmt = $con->prepare(getnotice());
+
+    if ($stmt) {
+        $stmt->bind_param("ss", $userType, $noticeText);
+
+        if ($stmt->execute()) {
+            $_SESSION["success_message"] = "Notice submitted successfully.";
+        } else {
+            $_SESSION["error_message"] = "Error executing the query: " . $stmt->error;
+        }
+
+        $stmt->close();
+    } else {
+        $_SESSION["error_message"] = "Error preparing the statement: " . $con->error;
+    }
+
+    $con->close();
+
+    header("Location: ../Main/Notice.php");
+    exit();
 }
 ?>

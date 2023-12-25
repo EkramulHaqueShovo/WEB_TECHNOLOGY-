@@ -4,56 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Courses</title>
+    <link rel="stylesheet" href="../Css/style.css">
 </head>
 <body>
     <header>
-        <center>
+        
             <h1>View Courses</h1>
             <nav>
                 <a href="Home_page.php">Home</a>
-                <a href="profile_teacher.php"> Profile</a>
+               
                 <a href="courses.php">Courses</a>
                 <a href="Notice.php">Notice</a> 
                 <a href="View_student.php">Student</a>
                 <a href="login.php">Logout</a>
             </nav>
-        </center><br>
+        <br>
     </header>
-    <center>
-        <form action="../Controller/process_courses.php" method="post">
-            <fieldset>
-                <legend style="text-align: center">
-                    <h3>View Courses</h3>
-                </legend><br>
+    
+        <fieldset>
+            <legend style="text-align: center">
+                <h3>View Courses</h3>
+            </legend><br>
 
-                <?php
-                // Database connection
-                $con = new mysqli('localhost', 'root', '', 'course_database');
-                if ($con->connect_error) {
-                    die("Connection failed: " . $con->connect_error);
+            <?php
+            include "../Model/mydb.php";
+            
+            $con = new mysqli('localhost', 'root', '', 'course_database');
+
+            if ($con->connect_error) {
+                die("Connection failed: " . $con->connect_error);
+            }
+
+            $result = $con->query("SELECT * FROM courses");
+
+            if ($result->num_rows > 0) {
+                
+                echo "<table border='1'>";
+                echo "<tr><th>Course Title</th><th>Course ID</th><th>Course Price</th><th>Course Description</th><th>Course Schedule</th></tr>";
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['Course_Title'] . "</td>";
+                    echo "<td>" . $row['Course_ID'] . "</td>";
+                    echo "<td>" . $row['Course_Price'] . "</td>";
+                    echo "<td>" . $row['Course_Description'] . "</td>";
+                    echo "<td>" . $row['Course_Schedule'] . "</td>";
+                    echo "</tr>";
                 }
 
-                // Fetch courses from the database
-                $result = $con->query("SELECT * FROM courses");
+                echo "</table>";
+            } else {
+                echo "No courses found.";
+            }
 
-                if ($result->num_rows > 0) {
-                    echo '<ul>';
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<br><h2><li>', "Course Title: " . $row['course_Title'] . '</li></h2>';
-                        echo "Course ID: " . $row['course_id'] . '</li><br>';
-                        echo "Course Price: " . $row['course_price'] . '</li><br>';
-                        echo "Course Schedule: " . $row['course_Schedule'] . '</li><br>';
-                        echo "Course Description: " . $row['course_Description'] . '</li><br>';
-                    }
-                    echo '</ul><br>';
-                } else {
-                    echo '<p>No courses available.</p>';
-                }
+            $con->close();
+            ?>
 
-                $con->close();
-                ?>
-            </fieldset>
-        </form>
-    </center>
+        </fieldset>
+    
 </body>
 </html>
