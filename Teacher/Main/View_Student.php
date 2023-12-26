@@ -3,43 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIEW STUDENT</title>
+    <title>View student</title>
     <link rel="stylesheet" href="../Css/style.css">
-    
 </head>
 <body>
     <header>
-        <center><h1>STUDENTS</h1>
-        <nav>
-            <a href="Home_page.php">Home</a>
-           
-            <a href="courses.php">Courses</a>
-            <a href="Notice.php">Notice</a> 
-            <a href="login.php">Logout</a>
-        </nav></center>
+        
+            <h1>View Student</h1>
+            <nav>
+                <a href="Home_page.php">Home</a>
+               
+                <a href="courses.php">Courses</a>
+                <a href="Notice.php">Notice</a> 
+                <a href="Student.php">Student</a>
+                <a href="login.php">Logout</a>
+            </nav>
+        <br>
     </header>
-
-    <center>
+    
         <fieldset>
-        <legend>STUDENTS</legend>
+            <legend style="text-align: center">
+                <h3>View Student</h3>
+            </legend><br>
 
-        <?php
-        $json_data = file_get_contents('../Data/student.json');
-        $data = json_decode($json_data, true);
+            <?php
+            include "../Model/mydb.php";
+            
+            $con = new mysqli('localhost', 'root', '', 'student_database');
 
-        if ($data !== null) {
-            foreach ($data as $std) {
-                echo "<h4><li>Student Name: {$std['cName']}</li></h4>";
-                echo "Student ID: ".$std['studentid']. '<br>';
-                echo "Course Name:" .$std['coursename']. '<br>';
-                echo "Course Section:" .$std['coursesection']. '<br>';
-                echo "Course Schedule:" .$std['courseSchedule']. '<br>';
+            if ($con->connect_error) {
+                die("Connection failed: " . $con->connect_error);
             }
-        } else {
-            echo "No student available!";
-        }
-        ?>
-    </fieldset>
-</center>
+
+            $result = $con->query("SELECT * FROM `student`");
+
+            if ($result->num_rows > 0) {
+                
+                echo "<table border='1'>";
+                echo "<tr><th>Student Name</th><th>Student Id</th><th>Student Institution</th><th>Email</th></tr>";
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['studentname'] . "</td>";
+                    echo "<td>" . $row['studentid'] . "</td>";
+                    echo "<td>" . $row['studentinstitution'] . "</td>";
+                    echo "<td>" . $row['studentemail'] . "</td>";
+                     echo "</tr>";
+                }
+
+                echo "</table>";
+            } else {
+                echo "No courses found.";
+            }
+
+            $con->close();
+            ?>
+
+        </fieldset>
+
+    
 </body>
 </html>

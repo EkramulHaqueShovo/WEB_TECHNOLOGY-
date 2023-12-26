@@ -25,7 +25,7 @@ include_once '../Controller/process_profile.php';
             <a href="Home_page.php">Home</a>
             <a href="courses.php">Courses</a>
             <a href="Notice.php">Notice</a> 
-            <a href="View_student.php">Student</a>
+            <a href="Student.php">Student</a>
             <a href="login.php">Logout</a>
         </nav>
         <br>

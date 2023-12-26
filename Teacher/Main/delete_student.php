@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DELETE COURSES</title>
+    <title>DELETE STUDENTS</title>
     <link rel="stylesheet" href="../Css/style.css">
    
 </head>
 <body>
     <header>
        
-        <h1>DELETE COURSES</h1>
+        <h1>DELETE STUDENTS</h1>
         <nav>
            
             <a href="courses.php">Courses</a>
@@ -23,15 +23,14 @@
         </nav><br>
     </header>
   
-    <form action="../Controller/process_delete_courses.php" method="post">
+    <form action="../Controller/process_delete_student.php" method="post">
       <fieldset>
         <legend style="text-align: center">
-            <h3> DELETE COURSES</h3>
+            <h3> DELETE STUDENTS</h3>
         </legend><br>
-        <h3>Course ID:</h3><br><br>
-        <input type="text" id="course_id" name="courseid" required><br><br>
-        <button type="submit">Delete Course</button><br><br>
-        
+        <h3>Student ID:</h3><br><br>
+        <input type="text" id="student_id" name="student_id"required><br><br>
+        <button type="submit">Delete Student</button><br><br>
      </fieldset>
  
    </form>

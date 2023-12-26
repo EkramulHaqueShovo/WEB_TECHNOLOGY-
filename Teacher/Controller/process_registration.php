@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
    
 
-    // Insert data into the database using prepared statements
+    
     $stmt = $con->prepare(getTeacherInformation());
 
     if ($stmt) {
@@ -78,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Error preparing the statement: " . $con->error;
     }
 
-    // Handle errors
     $_SESSION['errors'] = $errors;
     header("Location: ../Main/registration.php");
     exit();

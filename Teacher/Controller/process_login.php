@@ -1,5 +1,7 @@
 <?php
 
+include"../Model/mydb.php";
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . $con->connect_error);
         }
 
-        $stmt = $con->prepare("SELECT * FROM information WHERE `Teacher ID` = ? AND Password = ?");
+        $stmt = $con->prepare(getlogin());
         $stmt->bind_param("ss", $teacherId, $password);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -53,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     } else {
       
-        $error = "Teacher ID or Password wrong...";
+        $error = "User Id or Password wrong!";
         $_SESSION['errors'] = [$error];
         header("Location: ../Main/login.php");
         exit;

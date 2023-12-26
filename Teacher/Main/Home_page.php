@@ -34,7 +34,7 @@ if (!isset($_SESSION["teacherId"])) {
         <nav>
           <a href="Teacher_Profile.php">Profile</a>
             <a href="courses.php">Courses</a>
-            <a href="View_student.php">Student</a>
+            <a href="Student.php">Student</a>
             <a href="Notice.php">Notice</a>
             <a href="login.php">Logout</a>
           

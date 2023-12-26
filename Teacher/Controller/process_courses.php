@@ -2,21 +2,19 @@
 include "../Model/mydb.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Database connection
+   
     $con = new mysqli('localhost', 'root', '', 'course_database');
 
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
 
-    // Prepare data
     $courseTitle = $_POST['courseTitle'];
     $courseid = $_POST['courseid'];
     $courseprice = $_POST['courseprice'];
     $courseDescription = $_POST['courseDescription'];
     $courseSchedule = $_POST['courseSchedule'];
 
-    // Insert data into the database using prepared statements
     $stmt = $con->prepare(getInsertCourseQuery());
 
     if ($stmt) {

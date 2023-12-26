@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN PANEL</title>
     <link rel="stylesheet" href="../Css/style.css">
-  
     <script src="../js/reg.js"></script>
 </head>
-<script>
-
-</script>
 <body>
-
 
 <fieldset>
     <legend style="text-align: center">
         <h3>LOGIN PANEL</h3>
     </legend>
+
+    <?php
+    session_start();
+    if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
+        echo '<div class="error">' . implode('<br>', $_SESSION['errors']) . '</div>';
+        unset($_SESSION['errors']); 
+    }
+    ?>
+
     <form name="loginForm" action="../Controller/process_login.php" method="post" onsubmit="return loginFormvalid()">
-        <label for="teacherId">Username:</label><br><br>
+        <label for="teacherId">UserID:</label><br><br>
         <input type="text" id="teacherId" name="teacherId">
         <div id="T_idError1" class="error"></div><br><br>
 

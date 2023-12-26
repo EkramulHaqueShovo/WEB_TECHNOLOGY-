@@ -15,7 +15,7 @@
                
                 <a href="courses.php">Courses</a>
                 <a href="Notice.php">Notice</a> 
-                <a href="View_student.php">Student</a>
+                <a href="Student.php">Student</a>
                 <a href="login.php">Logout</a>
             </nav>
         <br>
@@ -40,7 +40,7 @@
             if ($result->num_rows > 0) {
                 
                 echo "<table border='1'>";
-                echo "<tr><th>Course Title</th><th>Course ID</th><th>Course Price</th><th>Course Description</th><th>Course Schedule</th></tr>";
+                echo "<tr><th>Course Title</th><th>Course ID</th><th>Course Price</th><th>Course Description</th><th>Course duration</th></tr>";
 
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";

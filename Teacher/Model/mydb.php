@@ -19,6 +19,16 @@ function getnotice(){
 function getshownotice(){
     return "SELECT * FROM notice";
 }
+function getaddstudent(){
+    return "INSERT INTO `student`(studentname, studentid, studentinstitution, studentemail, studentgender, studentpassword) VALUES (?, ?, ?, ?, ?, ?)";
+
+}
+function getDeletestudentQuery(){
+    return "DELETE FROM `student` WHERE studentid = ?";
+}
+function getlogin(){
+    return"SELECT * FROM information WHERE `Teacher ID` = ? AND Password = ?";
+}
 
 
 ?>

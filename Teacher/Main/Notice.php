@@ -19,18 +19,18 @@ $result = $con->query($sql);
 
 <body>
     <header>
-        <center>
+       
             <h1>CONTENT UPLOAD</h1>
             <nav>
                 <a href="Home_page.php">Home</a>
                 <a href="courses.php">Courses</a>
-                <a href="View_student.php">Student</a>
+               
+                <a href="Student.php">Student</a>
                 <a href="login.php">Logout</a>
             </nav>
-        </center><br>
+        <br>
     </header>
 
-    <center>
         <fieldset>
             <legend>Notice</legend>
             <form action="../Controller/process_notice.php" method="post">
@@ -74,6 +74,6 @@ $result = $con->query($sql);
 
 
         </fieldset>
-    </center>
+   
 </body>
 </html>

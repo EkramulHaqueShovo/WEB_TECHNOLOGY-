@@ -3,25 +3,25 @@ include"../Model/mydb.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
-    $con = new mysqli('localhost', 'root', '', 'course_database');
+    $con = new mysqli('localhost', 'root', '', 'student_database');
 
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
 
-    $courseId = isset($_POST["courseid"]) ? $_POST["courseid"] : null;
+    $student_id = isset($_POST["student_id"]) ? $_POST["student_id"] : null;
 
-    if ($courseId !== null) {
+    if ($student_id !== null) {
       
-        $stmt = $con->prepare(getDeleteCourseQuery());
+        $stmt = $con->prepare(getDeletestudentQuery());
 
         if ($stmt) {
-            $stmt->bind_param("s", $courseId);
+            $stmt->bind_param("s", $student_id);
 
             if ($stmt->execute()) {
                 $stmt->close();
                 $con->close();
-                header("Location: ../Main/courses.php");
+                header("Location: ../Main/Student.php");
                 exit();
             } else {
                 echo "Error executing the query: " . $stmt->error;
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error preparing the statement: " . $con->error;
         }
     } else {
-        header("Location: ../Main/Delete_course.php");
+        header("Location: ../Main/delete_student.php");
         exit();
     }
 }

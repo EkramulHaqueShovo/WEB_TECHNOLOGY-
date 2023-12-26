@@ -15,12 +15,12 @@
              <a href="Home_page.php">Home</a>
             
             <a href="courses.php">Courses</a>
-            <a href="View_student.php">Student</a>
+            <a href="Student.php">Student</a>
             <a href="Notice.php">Notice</a>
             <a href="login.php">Logout</a>
 
           
-        </nav></center><br>
+        </nav><br>
     </header>
   
 
@@ -41,7 +41,7 @@
         <input type="text" id="courseprice" name="courseprice" required><br><br>
  
 
-        <h3>Course Schedule:</h3><br>
+        <h3>Course Duration:</h3><br>
         <input type="text" id="courseSchedule" name="courseSchedule" required><br><br>
 
         <h3>Course Description:<h3><br>
