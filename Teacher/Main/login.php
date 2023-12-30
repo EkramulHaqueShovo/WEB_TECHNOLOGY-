@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,6 @@
     <legend style="text-align: center">
         <h3>LOGIN PANEL</h3>
     </legend>
-
     <?php
     session_start();
     if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
@@ -21,6 +21,8 @@
         unset($_SESSION['errors']); 
     }
     ?>
+
+   
 
     <form name="loginForm" action="../Controller/process_login.php" method="post" onsubmit="return loginFormvalid()">
         <label for="teacherId">UserID:</label><br><br>

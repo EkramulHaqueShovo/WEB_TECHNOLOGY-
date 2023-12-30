@@ -27,6 +27,7 @@
         </legend>
         <br><a href="course_creation.php">ADD COURSES</a><br>
         <br><a href="View_courses.php">VIEW COURSES</a><br>
+        <br><a href="Courses_update.php">UPDATE COURSES</a><br>
         <br><a href="Delete_course.php">DELETE COURSES</a><br><br>
       
     </fieldset>

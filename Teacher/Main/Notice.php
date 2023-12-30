@@ -20,7 +20,7 @@ $result = $con->query($sql);
 <body>
     <header>
        
-            <h1>CONTENT UPLOAD</h1>
+            <h1>Notices</h1>
             <nav>
                 <a href="Home_page.php">Home</a>
                 <a href="courses.php">Courses</a>

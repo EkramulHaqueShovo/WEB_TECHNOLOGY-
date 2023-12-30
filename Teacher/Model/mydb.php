@@ -29,6 +29,13 @@ function getDeletestudentQuery(){
 function getlogin(){
     return"SELECT * FROM information WHERE `Teacher ID` = ? AND Password = ?";
 }
+function getviewcourses(){
+    return "SELECT * FROM courses";
+}
+function getCourseById(){
+    return "SELECT * FROM courses WHERE course_id = ?";
+}
+
 
 
 ?>
