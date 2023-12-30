@@ -33,4 +33,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $con = new mysqli('localhost', 'root', '', 'course_database');
+
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+    }
+
+    $courseId = isset($_POST["course_id"]) ? $_POST["course_id"] : null;
+
+    if ($courseId !== null) {
+        $stmt = $con->prepare(getCourseById());
+
+        if ($stmt) {
+            $stmt->bind_param("s", $courseId);
+
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $courseData = $result->fetch_assoc();
+                    $stmt->close();
+                } else {
+                    echo "No results found for Course ID: $courseId";
+                    exit();
+                }
+            } else {
+                echo "Error executing the query: " . $stmt->error;
+                exit();
+            }
+        } else {
+            echo "Error preparing the statement: " . $con->error;
+            exit();
+        }
+    } else {
+        echo "Invalid Course ID";
+        exit();
+    }
+
+    $con->close(); 
+}
 ?>
